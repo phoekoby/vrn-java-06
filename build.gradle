@@ -1,0 +1,36 @@
+repositories {
+    mavenCentral()
+}
+
+apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = "ru.dataart.academy.java.Main"
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+jar {
+    baseName = 'homework'
+    version = '0.0.1'
+    manifest {
+        attributes "Main-Class": "ru.dataart.academy.java.Main"
+        attributes "Class-Path": configurations.compileClasspath.collect { it.absolutePath }.join(" ")
+    }
+}
+
+dependencies {
+    testImplementation(
+            'org.junit.jupiter:junit-jupiter-api:5.1.0'
+    )
+    testRuntimeOnly(
+            'org.junit.jupiter:junit-jupiter-engine:5.1.0'
+    )
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        showStandardStreams = true
+    }
+}
